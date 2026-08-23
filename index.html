@@ -11,11 +11,11 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --navy:#1F4E79;--navy-light:#2E6DA4;--navy-pale:#D6E4F0;
-  --accent:#C9A84C;--accent-pale:#FEF3C7;--accent-dark:#92400E;
-  --teal:#0891B2;--teal-pale:#CFFAFE;--teal-dark:#0E7490;
-  --dark:#111827;--gray:#6B7280;--gray-light:#9CA3AF;
-  --light:#F8FAFC;--white:#FFFFFF;--border:#E5E7EB;
+  --navy:#3A2F63;--navy-light:#584A8C;--navy-pale:#EAE5F5;
+  --accent:#D97D4A;--accent-pale:#FBE7D6;--accent-dark:#A2542A;
+  --teal:#3E8574;--teal-pale:#E3F0EA;--teal-dark:#255A4C;
+  --dark:#231C30;--gray:#6C6478;--gray-light:#A69FB3;
+  --light:#FAF7F3;--white:#FFFFFF;--border:#EBE5F1;
   --radius:12px;--radius-sm:8px;--radius-lg:16px;
 }
 
@@ -67,7 +67,6 @@ nav{
 .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.65rem 1.4rem;border-radius:var(--radius-sm);font-size:0.875rem;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none}
 .btn-primary{background:var(--navy);color:var(--white)}.btn-primary:hover{background:var(--navy-light)}
 .btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}.btn-outline:hover{background:var(--navy-pale)}
-.btn-teal{background:var(--teal);color:var(--white)}.btn-teal:hover{background:var(--teal-dark)}
 /* ── CONTACT ICONS ── */
 .contact-icons{display:flex;flex-wrap:wrap;gap:0.6rem}
 .ci{
@@ -92,14 +91,6 @@ nav{
   opacity:0;pointer-events:none;transition:opacity 0.15s;z-index:10;
 }
 .ci:hover::after,.ci:hover::before{opacity:1}
-/* Scholar placeholder box */
-.ci .scholar-box{
-  width:18px;height:18px;border-radius:3px;
-  background:currentColor;display:flex;align-items:center;justify-content:center;
-  font-size:0.6rem;font-weight:700;color:var(--white);font-family:'DM Sans',sans-serif;
-  flex-shrink:0;
-}
-.ci:hover .scholar-box{color:var(--navy)}
 .hero-visual{display:flex;flex-direction:column;gap:0.875rem}
 .stat-card{background:var(--light);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;transition:box-shadow 0.2s}
 .stat-card:hover{box-shadow:0 4px 16px rgba(31,78,121,0.08)}
@@ -116,18 +107,12 @@ section{max-width:1100px;margin:0 auto;padding:5rem 2rem;border-top:1px solid va
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:600;color:var(--dark);margin-bottom:2.5rem;line-height:1.2}
 
 /* ── ONGOING LEARNING ── */
-.learning-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.learning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
 .learning-card{background:var(--light);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
 .learning-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .learning-card-title{font-size:0.9rem;font-weight:500;color:var(--dark)}
 .status-badge{font-size:0.7rem;font-weight:500;padding:0.2rem 0.65rem;border-radius:100px;letter-spacing:0.04em}
 .status-progress{background:#DCFCE7;color:#166534}
-.status-planned{background:var(--navy-pale);color:var(--navy)}
-.status-done{background:var(--accent-pale);color:var(--accent-dark)}
-.progress-track{height:6px;background:var(--border);border-radius:100px;overflow:hidden;margin-bottom:0.5rem}
-.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--teal),var(--navy-light));width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)}
-.progress-meta{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--gray)}
-.progress-meta span{font-family:'DM Mono',monospace}
 .learning-tools{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem}
 .tool-chip{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:0.15rem 0.5rem;font-size:0.72rem;color:var(--dark)}
 
@@ -240,112 +225,136 @@ section{max-width:1100px;margin:0 auto;padding:5rem 2rem;border-top:1px solid va
 .skill-tag{background:var(--light);border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;color:var(--dark)}
 .skill-tag-teal{background:var(--teal-pale);border-color:var(--teal-pale);color:var(--teal-dark)}
 
-/* ── ACHIEVEMENTS ── */
-.achieve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.achieve-card{
-  border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;
-  position:relative;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;cursor:default;
+/* ── CREDENTIAL CARDS (Certifications + Achievements) ── */
+.cred-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.cred-card{
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  background:var(--white);display:flex;flex-direction:column;
+  transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;
 }
-.achieve-card:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(201,168,76,0.12)}
-.achieve-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-pale))}
-.achieve-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-pale);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
-.achieve-icon svg{width:20px;height:20px;stroke:var(--accent-dark);fill:none;stroke-width:2}
-.achieve-name{font-size:0.875rem;font-weight:500;color:var(--dark);margin-bottom:0.25rem;line-height:1.3}
-.achieve-issuer{font-size:0.75rem;color:var(--gray);margin-bottom:0.75rem}
-.achieve-year{font-size:0.72rem;font-weight:500;color:var(--accent-dark);background:var(--accent-pale);display:inline-block;padding:0.15rem 0.6rem;border-radius:100px}
-.cred-type{font-size:0.68rem;font-weight:500;padding:0.15rem 0.6rem;border-radius:100px;display:inline-block;margin-bottom:0.6rem}
-.cred-type-achieve{background:var(--accent-pale);color:var(--accent-dark)}
-.cred-type-cert{background:var(--navy-pale);color:var(--navy)}
-
-/* ── CERTIFICATIONS ── */
-.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.cert-card{
-  border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;
-  position:relative;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;cursor:default;
+.cred-card.clickable{cursor:pointer}
+.cred-card.clickable:hover{border-color:var(--navy-light);box-shadow:0 8px 22px rgba(58,47,99,0.12);transform:translateY(-2px)}
+.cred-thumb{
+  height:150px;background:var(--light);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);
 }
-.cert-card:hover{border-color:var(--navy-light);box-shadow:0 4px 12px rgba(31,78,121,0.08)}
-.cert-icon{width:40px;height:40px;border-radius:10px;background:var(--navy-pale);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
-.cert-icon svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:2}
-.cert-name{font-size:0.875rem;font-weight:500;color:var(--dark);margin-bottom:0.25rem;line-height:1.3}
-.cert-issuer{font-size:0.75rem;color:var(--gray);margin-bottom:0.75rem}
-.cert-year{font-size:0.72rem;font-weight:500;color:var(--navy-light);background:var(--navy-pale);display:inline-block;padding:0.15rem 0.6rem;border-radius:100px}
-
-/* ── PEEK HOVER ── */
-.peek-panel{
-  position:absolute;bottom:0;left:0;right:0;
-  background:var(--navy);color:var(--white);
-  padding:1rem 1.25rem;
-  transform:translateY(100%);
-  transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);
-  border-radius:0 0 11px 11px;
+.cred-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.35s ease}
+.cred-card.clickable:hover .cred-thumb img{transform:scale(1.05)}
+.cred-thumb-placeholder{display:flex;flex-direction:column;align-items:center;gap:0.4rem;color:var(--gray-light);font-size:0.7rem;padding:1rem;text-align:center}
+.cred-thumb-placeholder svg{width:24px;height:24px;stroke:var(--gray-light);fill:none;stroke-width:1.5}
+.cred-thumb-zoom{
+  position:absolute;top:0.55rem;right:0.55rem;width:28px;height:28px;border-radius:50%;
+  background:rgba(35,28,48,0.55);display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.2s;
 }
-.cert-card:hover .peek-panel,
-.achieve-card:hover .peek-panel{transform:translateY(0)}
-.peek-eyebrow{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:0.3rem}
-.peek-desc{font-size:0.78rem;line-height:1.5;opacity:0.9;margin-bottom:0.5rem}
-.peek-link{font-size:0.72rem;font-weight:500;color:var(--navy-pale);text-decoration:none;display:inline-flex;align-items:center;gap:0.25rem;opacity:0.85;transition:opacity 0.15s}
-.peek-link:hover{opacity:1}
-
-/* ── PROJECT CASES ── */
-.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.project-card{
-  border:1px solid var(--border);border-radius:var(--radius-lg);
-  display:flex;flex-direction:column;overflow:hidden;
-  transition:box-shadow 0.2s,border-color 0.2s;
+.cred-card.clickable:hover .cred-thumb-zoom{opacity:1}
+.cred-thumb-zoom svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2}
+.cred-type-tag{
+  position:absolute;top:0.55rem;left:0.55rem;z-index:2;
+  font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  padding:0.2rem 0.55rem;border-radius:100px;color:#fff;
 }
-.project-card:hover{box-shadow:0 6px 20px rgba(31,78,121,0.1);border-color:var(--navy-pale)}
-.project-thumb{
-  height:130px;background:var(--light);
-  display:flex;align-items:center;justify-content:center;
-  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
-}
-.project-thumb img{width:100%;height:100%;object-fit:cover}
-.project-thumb .thumb-placeholder{
-  display:flex;flex-direction:column;align-items:center;gap:0.4rem;
-  color:var(--gray-light);font-size:0.75rem;
-}
-.project-thumb .thumb-placeholder svg{width:28px;height:28px;stroke:var(--gray-light);fill:none;stroke-width:1.5}
-.project-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:0.75rem}
-.project-status{
-  position:absolute;top:0.75rem;right:0.75rem;
-  font-size:0.68rem;font-weight:500;padding:0.2rem 0.6rem;border-radius:100px;
-}
-.project-title{font-size:0.925rem;font-weight:500;color:var(--dark);line-height:1.3}
-.project-desc{font-size:0.82rem;color:var(--gray);line-height:1.6;flex:1}
-.project-tools{display:flex;flex-wrap:wrap;gap:0.35rem}
-.tool-tag{font-size:0.7rem;font-weight:500;padding:0.18rem 0.55rem;border-radius:4px;background:var(--teal-pale);color:var(--teal-dark)}
-.tool-tag-gold{background:var(--accent-pale);color:var(--accent-dark)}
-.tool-tag-navy{background:var(--navy-pale);color:var(--navy)}
-.project-footer{display:flex;align-items:center;justify-content:space-between;padding-top:0.75rem;border-top:1px solid var(--border);margin-top:auto}
-.project-date{font-size:0.72rem;color:var(--gray-light);font-family:'DM Mono',monospace}
-.project-link{font-size:0.75rem;font-weight:500;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:0.25rem;transition:color 0.2s}
-.project-link:hover{color:var(--teal)}
-.project-add{
+.cred-type-tag.cert{background:rgba(58,47,99,0.88)}
+.cred-type-tag.achieve{background:rgba(217,125,74,0.9)}
+.cred-body{padding:1rem 1.1rem 1.15rem;display:flex;flex-direction:column;gap:0.4rem;flex:1}
+.cred-name{font-size:0.86rem;font-weight:500;color:var(--dark);line-height:1.35}
+.cred-issuer{font-size:0.73rem;color:var(--gray);line-height:1.4}
+.cred-extra{font-size:0.7rem;color:var(--gray);font-style:italic;line-height:1.5}
+.cred-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:0.5rem}
+.cred-year{font-size:0.7rem;font-weight:500;color:var(--navy-light);background:var(--navy-pale);display:inline-block;padding:0.15rem 0.6rem;border-radius:100px}
+.cred-no-file{font-size:0.68rem;color:var(--gray-light);font-style:italic}
+.cred-folder-link{font-size:0.68rem;color:var(--navy-light);text-decoration:underline;text-decoration-style:dashed;text-underline-offset:2px;cursor:pointer}
+.cred-folder-link:hover{color:var(--navy)}
+.cred-type-tag.coming{background:rgba(108,100,120,0.85)}
+.cred-type-tag.progress{background:rgba(62,133,116,0.9)}
+.cred-empty{
+  padding:2.5rem 1rem;text-align:center;color:var(--gray-light);
+  font-size:0.85rem;font-style:italic;
   border:1.5px dashed var(--border);border-radius:var(--radius-lg);
-  min-height:260px;display:flex;align-items:center;justify-content:center;
-  cursor:default;color:var(--gray-light);
 }
-.project-add-inner{text-align:center;font-size:0.82rem}
-.project-add-inner svg{width:28px;height:28px;stroke:var(--gray-light);fill:none;stroke-width:1.5;display:block;margin:0 auto 0.5rem}
+
+/* ── ACHIEVEMENTS REVEAL/HIDE TOGGLE ── */
+.section-title-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.section-title-row .section-eyebrow{margin-bottom:0.6rem}
+.achieve-eye-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;flex-shrink:0;
+  background:var(--light);border:1px solid var(--border);border-radius:100px;
+  padding:0.55rem 1.1rem;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-size:0.8rem;font-weight:500;color:var(--navy);transition:border-color 0.2s,background 0.2s;
+}
+.achieve-eye-btn:hover{border-color:var(--navy-light);background:var(--navy-pale)}
+.achieve-eye-btn svg{width:16px;height:16px;stroke:var(--navy);fill:none;stroke-width:2;flex-shrink:0}
+.achieve-reveal-wrap{position:relative}
+.achieve-reveal-wrap .cred-grid{filter:blur(14px);transition:filter 0.35s ease;pointer-events:none;user-select:none}
+.achieve-reveal-wrap.revealed .cred-grid{filter:none;pointer-events:auto;user-select:auto}
+.achieve-blur-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
+.achieve-reveal-wrap.revealed .achieve-blur-overlay{display:none}
+.achieve-blur-hint{
+  background:var(--white);border:1px solid var(--border);border-radius:100px;
+  padding:0.6rem 1.2rem;font-size:0.78rem;color:var(--gray);
+  box-shadow:0 4px 16px rgba(35,28,48,0.1);
+}
+
+/* ── TAB SWITCHER (used by Certifications & Projects) ── */
+.tab-nav{display:flex;flex-wrap:wrap;gap:0.25rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
+.tab-btn{
+  background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;
+  padding:0.7rem 1.1rem;font-size:0.84rem;font-weight:500;color:var(--gray);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  display:flex;align-items:center;gap:0.4rem;transition:color 0.2s,border-color 0.2s;
+}
+.tab-btn:hover{color:var(--navy)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--navy)}
+.tab-count{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gray-light)}
+.tab-btn.active .tab-count{color:var(--navy-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── CERTIFICATE VIEWER MODAL ── */
+.cert-modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(35,28,48,0.8);
+  display:flex;align-items:center;justify-content:center;padding:2rem;
+  opacity:0;visibility:hidden;transition:opacity 0.2s ease;
+}
+.cert-modal-overlay.active{opacity:1;visibility:visible}
+.cert-modal-box{
+  position:relative;width:min(760px,100%);height:min(85vh,900px);
+  background:var(--white);border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  transform:scale(0.96);transition:transform 0.2s ease;
+}
+.cert-modal-overlay.active .cert-modal-box{transform:scale(1)}
+.cert-modal-box iframe{width:100%;height:100%;border:none;display:block}
+.cert-modal-close{
+  position:absolute;top:0.75rem;right:0.75rem;z-index:2;
+  width:34px;height:34px;border-radius:50%;border:none;
+  background:var(--dark);color:var(--white);font-size:1.1rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.85;
+}
+.cert-modal-close:hover{opacity:1;background:var(--navy)}
+.cert-modal-title{
+  position:absolute;top:0;left:0;right:0;padding:0.75rem 3.5rem 0.75rem 1.25rem;
+  background:linear-gradient(180deg,rgba(35,28,48,0.68),transparent);
+  color:var(--white);font-size:0.82rem;font-weight:500;z-index:1;pointer-events:none;
+}
 
 /* ── FOOTER ── */
 footer{border-top:1px solid var(--border);padding:2.5rem 2rem;display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:1rem}
 footer p{font-size:0.82rem;color:var(--gray)}
-.footer-links{display:flex;gap:1.5rem}
-.footer-links a{font-size:0.82rem;color:var(--gray);text-decoration:none;transition:color 0.2s}
-.footer-links a:hover{color:var(--navy)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;min-height:auto;gap:2.5rem}
   .about-grid{grid-template-columns:1fr;gap:2rem}
   .learning-grid{grid-template-columns:1fr}
-  .achieve-grid,.cert-grid,.project-grid{grid-template-columns:repeat(2,1fr)}
+  .cred-grid{grid-template-columns:repeat(2,1fr)}
   .pub-summary{grid-template-columns:1fr}
   .tl-item{grid-template-columns:110px 1px 1fr;gap:0 1.25rem}
 }
 @media(max-width:600px){
-  .achieve-grid,.cert-grid,.project-grid{grid-template-columns:1fr}
+  .cred-grid{grid-template-columns:1fr}
+  .tab-nav{overflow-x:auto;flex-wrap:nowrap}
   .nav-links a{padding:0 0.6rem;font-size:0.72rem}
 }
 </style>
@@ -362,7 +371,8 @@ footer p{font-size:0.82rem;color:var(--gray)}
     <li><a href="#research">Research</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#achievements">Achievements</a></li>
     <li><a href="#projects">Projects</a></li>
   </ul>
 </nav>
@@ -448,6 +458,7 @@ footer p{font-size:0.82rem;color:var(--gray)}
 </div>
 
 <!-- ══ 2. ONGOING LEARNING ══ -->
+
 <section id="learning">
   <div class="section-eyebrow">Currently</div>
   <div class="section-title">Ongoing Projects & Learning</div>
@@ -455,56 +466,20 @@ footer p{font-size:0.82rem;color:var(--gray)}
 
     <div class="learning-card">
       <div class="learning-card-header">
-        <span class="learning-card-title">Microsoft Excel by BelajarExcel.id</span>
-        <div class="progress-meta"><span>36%</span></div>
+        <span class="learning-card-title">Google Cloud Arcade</span>
+        <span class="status-badge status-progress">In Progress</span>
       </div>
-      <a href="https://belajarexcel.id/" target="_blank"
+      <a href="https://go.cloudskillsboost.google/arcade" target="_blank"
       style="font-size:0.78rem;color:var(--teal-dark);text-decoration:none;display:inline-flex;align-items:center;gap:0.3rem;margin-bottom:0.5rem;">
       Sumber belajar ↗
     </a>
     <p style="font-size:0.8rem;color:var(--gray);line-height:1.6;margin-bottom:0.75rem;">
-      Progress Bab: Fungsi Lookup dan Referensi
+      Menyelesaikan hands-on labs dan quest berbasis Google Cloud Skills Boost untuk mengumpulkan badge cloud sambil memperkuat kemampuan tooling data.
     </p>
-      <div class="progress-track"><div class="progress-fill" data-width="36"></div></div>
-    </div>
-
-    <div class="learning-card">
-      <div class="learning-card-header">
-        <span class="learning-card-title">Microsoft Elevate Training Center (METC) - Skill Sprint by Microsoft x Dicoding</span>
-        <div class="progress-meta"><span>32%</span></div>
-      </div>
-      <a href="https://dicoding.elevaite.id/" target="_blank"
-      style="font-size:0.78rem;color:var(--teal-dark);text-decoration:none;display:inline-flex;align-items:center;gap:0.3rem;margin-bottom:0.5rem;">
-      Sumber belajar ↗
-    </a>
-    <p style="font-size:0.8rem;color:var(--gray);line-height:1.6;margin-bottom:0.75rem;">
-      Progress: Belajar Penerapan Data Science dengan Microsoft Fabric
-    </p>
-      <div class="progress-track"><div class="progress-fill" data-width="32"></div></div>
-    </div>
-
-    <div class="learning-card">
-      <div class="learning-card-header">
-        <span class="learning-card-title">Fullstack Data Analyst by Rocket Tutor x Pijar Academy</span>
-        <div class="progress-meta"><span>23%</span></div>
-      </div>
-      <p style="font-size:0.8rem;color:var(--gray);line-height:1.6;margin-bottom:0.75rem;">
-        Progress: Data Analytics Pipeline
-      </p>
-      <div class="progress-track"><div class="progress-fill" data-width="23"></div></div>
-    </div>
-
-    <!--<div class="learning-card">
-      <div class="learning-card-header">
-        <span class="learning-card-title">SQL Fundamentals</span>
-        <span class="status-badge status-planned">Planned</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" data-width="10"></div></div>
-      <div class="progress-meta"><span>10%</span><span>Next priority</span></div>
       <div class="learning-tools">
-        <span class="tool-chip">SQL</span><span class="tool-chip">PostgreSQL</span>
+        <span class="tool-chip">Google Cloud</span><span class="tool-chip">Hands-on Labs</span>
       </div>
-    </div>-->
+    </div>
 
   </div>
 </section>
@@ -777,262 +752,466 @@ footer p{font-size:0.82rem;color:var(--gray)}
   </div>
 </section>
 
-<!-- ══ 8. CREDENTIALS & RECOGNITION ══ -->
-<section id="credentials">
+<!-- ══ 8. CERTIFICATIONS ══ -->
+<section id="certifications">
   <div class="section-eyebrow">Recognition & Credentials</div>
-  <div class="section-title">Credentials & Honors</div>
-  <div class="achieve-grid reveal">
+  <div class="section-title">Certifications</div>
 
-    <!-- ── Mini Bootcamp DQLab Introduction to Data Analytics (SQL, Python, Excel) Batch 12 ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">Mini Bootcamp Introduction to Data Analytics (SQL, Python, Excel) Batch 12</div>
-      <div class="achieve-issuer">DQLab</div>
-      <span class="achieve-year">2026</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Completed a structured introductory bootcamp covering the foundations of data analytics using SQL, Python, and Excel — including data querying, basic scripting, and spreadsheet analysis through hands-on exercises.</div>
-        <a href="https://drive.google.com/file/d/1FQbVYHCzYm7VzISoH9a__qZdN7OzN5k1/view?usp=sharing" class="peek-link">View Certificate ↗</a>
-      </div>
-    </div>
+  <div class="tab-nav reveal">
+    <button class="tab-btn active" data-target="cert-panel-da" onclick="switchTab(this)">Data Analytics <span class="tab-count">(6)</span></button>
+    <button class="tab-btn" data-target="cert-panel-dsml" onclick="switchTab(this)">Data Science & ML <span class="tab-count">(2)</span></button>
+    <button class="tab-btn" data-target="cert-panel-se" onclick="switchTab(this)">Software Engineering <span class="tab-count">(1)</span></button>
+    <button class="tab-btn" data-target="cert-panel-typing" onclick="switchTab(this)">Touch Typing <span class="tab-count">(1)</span></button>
+    <button class="tab-btn" data-target="cert-panel-other" onclick="switchTab(this)">Other <span class="tab-count">(3)</span></button>
+  </div>
 
-    <!-- ── RevoU Mini Bootcamp Intro to Software Engineering ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">Mini Bootcamp Introduction to Software Engineering</div>
-      <div class="achieve-issuer">RevoU</div>
-      <span class="achieve-year">2026</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Completed an introductory bootcamp covering fundamental software engineering concepts — including problem-solving approaches, basic programming logic, and an overview of the software development process.</div>
-        <a href="https://drive.google.com/file/d/1ZjYyVMAJ0KFu1AYgqm5eNV0YR-WhH576/view?usp=sharing" class="peek-link">View Certificate ↗</a>
-      </div>
-    </div>
+  <div class="reveal">
 
-    <!-- ── Passed LPDP Substantive Selection Test ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-achieve">Achievement</span>
-      <div class="achieve-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
-      <div class="achieve-name">Passed LPDP Scholastic Selection Test</div>
-      <div class="achieve-issuer">Lembaga Pengelola Dana Pendidikan — Indonesia Endowment Fund for Education</div>
-      <span class="achieve-year">2026</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this achievement</div>
-        <div class="peek-desc">Passed the LPDP Scholastic Selection — a computer-based aptitude test assessing verbal, quantitative, and analytical reasoning, as part of the highly competitive LPDP national scholarship selection process.</div>
-      </div>
-    </div>
+    <!-- ── Panel: Data Analytics (default view) ── -->
+    <div class="tab-panel active" id="cert-panel-da">
+      <div class="cred-grid">
 
-    <!-- ── TOEFL ITP — Score 563 ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-achieve">Achievement</span>
-      <div class="achieve-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-      <div class="achieve-name">TOEFL ITP — Score 563</div>
-      <div class="achieve-issuer">ONE STOP ENGLISH EDUCATION · Officially Proctored Remote Testing</div>
-      <span class="achieve-year">2026</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this achievement</div>
-        <div class="peek-desc">Scored 563 on the official TOEFL ITP administered via Remote Proctoring — equivalent to B2 upper-intermediate English proficiency.</div>
-        <a href="https://drive.google.com/file/d/1s931zaQRWVBoXVG05IT79zG79iXUiA3J/view?usp=sharing" class="peek-link">View Certificate ↗</a>
-      </div>
-    </div>
-
-    <!-- ── Cum laude Certificate ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-achieve">Achievement</span>
-      <div class="achieve-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-4 7h16l-4-7"/></svg></div>
-      <div class="achieve-name">Cum laude Certificate</div>
-      <div class="achieve-issuer">Faculty of Mathematics and Natural Sciences University of Jember</div>
-      <span class="achieve-year">2026</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this achievement</div>
-        <div class="peek-desc">Graduated with cum laude distinction from the Faculty of Mathematics and Natural Sciences, Universitas Jember — recognizing consistent academic excellence throughout the undergraduate program with a GPA of 3.72/4.00.</div>
-        <a href="https://drive.google.com/file/d/1IPwNoP0kYCNAPF6Rdk7m7FxOEo0m81Uj/view?usp=sharing" class="peek-link">View Certificate ↗</a>
-      </div>
-    </div>
-
-    <!-- ── Touch Typing Certificate (typing.com) ── -->
-     <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">Touch Typing Certificate</div>
-      <div class="achieve-issuer">typing.com · Beginner · Intermediate · Advanced</div>
-      <span class="achieve-year">2026</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Completed the beginner, intermediate, and advanced courses, achieving full 10-finger touch typing proficiency with validated speed and accuracy.</div>
-        <div style="font-size:0.72rem;opacity:0.75;line-height:1.5;margin-bottom:0.5rem;font-style:italic;">
-          Tested daily to build touch typing habits and sharpen accuracy and WPM
-          — current record:
-          <span style="font-family:'DM Mono',monospace;font-style:normal;">
-            59 WPM · 97% accuracy · 92% consistency · 5.1 keystroke/second · 1m0s test duration · common mode test
-          </span>
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1FQbVYHCzYm7VzISoH9a__qZdN7OzN5k1/preview','Mini Bootcamp Introduction to Data Analytics — DQLab')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1FQbVYHCzYm7VzISoH9a__qZdN7OzN5k1&sz=w800" alt="Mini Bootcamp Introduction to Data Analytics certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Mini Bootcamp Introduction to Data Analytics (SQL, Python, Excel) Batch 12</div>
+            <div class="cred-issuer">DQLab</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
         </div>
-        <a href="https://drive.google.com/drive/folders/1zDtAia7eyBpNw0QUfo8e05jcX7ClL3Cw?usp=sharing" target="_blank" class="peek-link">View Certificates ↗</a>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/120-vdCmXkIko66B00fiFZAXgTKVC2U8w/preview','DQLab Data Analyst Career Track (Python) — Track Certificate')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=120-vdCmXkIko66B00fiFZAXgTKVC2U8w&sz=w800" alt="DQLab Data Analyst Career Track certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Data Analyst Career Track (Python)</div>
+            <div class="cred-issuer">DQLab</div>
+            <div class="cred-footer">
+              <span class="cred-year">2026</span>
+              <span class="cred-folder-link" onclick="event.stopPropagation();openCertModal('https://drive.google.com/embeddedfolderview?id=1e6uMGdc74KDB-IAaHQSsmM2-scLbj0Iu#grid','DQLab Data Analyst Career Track — All 15 Module Certificates')">15 modul ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1TQwV1cRyPkdb2u3uokSV5D8kygJyD2M-/preview','MySkill Short Class — SQL Introduction for Data Analysis')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1TQwV1cRyPkdb2u3uokSV5D8kygJyD2M-&sz=w800" alt="MySkill SQL Introduction certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Short Class: SQL Introduction for Data Analysis</div>
+            <div class="cred-issuer">MySkill</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1xt8zGCBhAvBop8KCPdUYN_Knhs2YehwZ/preview','MySkill Short Class — Data Visualization with Microsoft Excel')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1xt8zGCBhAvBop8KCPdUYN_Knhs2YehwZ&sz=w800" alt="MySkill Data Visualization with Excel certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Short Class: Data Visualization with Microsoft Excel</div>
+            <div class="cred-issuer">MySkill</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1nJxRuxz-bFpHMUz6gIzY1OKM9LMZgfVF/preview','Mini Bootcamp Introduction to Data Analyst — RevoU')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1nJxRuxz-bFpHMUz6gIzY1OKM9LMZgfVF&sz=w800" alt="RevoU Introduction to Data Analyst certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Mini Bootcamp Introduction to Data Analyst</div>
+            <div class="cred-issuer">RevoU</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1-pq1kGs-s29edXSOPffbXUHPRzmCz_ql/preview','Fullstack Data Analyst — Rocket Tutor × Pijar Academy')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1-pq1kGs-s29edXSOPffbXUHPRzmCz_ql&sz=w800" alt="Fullstack Data Analyst Rocket Tutor certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Fullstack Data Analyst</div>
+            <div class="cred-issuer">Rocket Tutor × Pijar Academy</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── Laboratory Practice Assistant ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-achieve">Achievement</span>
-      <div class="achieve-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
-      <div class="achieve-name">Laboratory Practice Assistant</div>
-      <div class="achieve-issuer">Faculty of Mathematics and Natural Sciences University of Jember</div>
-      <span class="achieve-year">2025</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this achievement</div>
-        <div class="peek-desc">Formally recognized as a laboratory teaching assistant at the Faculty of Mathematics and Natural Sciences, Universitas Jember — covering eight technical courses across four semesters in physics-related laboratory instruction.</div>
-        <a href="https://drive.google.com/file/d/1NFmemZwPzdBV7-FYTnAMSkrPzNnCiEvJ/view?usp=sharing" class="peek-link">View Certificate ↗</a>
-      </div>
-    </div>
-    
-    <!-- ── 2nd International Basic Science Conference── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">2nd International Basic Science Conference</div>
-      <div class="achieve-issuer">University of Jember</div>
-      <span class="achieve-year">2024</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Served on the organizing committee of the 2nd International Basic Science Conference (IBSC) at Universitas Jember — an international academic event bringing together researchers and scientists across basic science disciplines.</div>
-        <a href="https://drive.google.com/file/d/14hWoPiyTrWuEM26Mo5CaQfEZ42cRPRR-/view?usp=sharing" class="peek-link">View Certificate ↗</a>
+    <!-- ── Panel: Data Science & Machine Learning ── -->
+    <div class="tab-panel" id="cert-panel-dsml">
+      <div class="cred-grid">
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/16UnQNDSrcjFT2r9rNz-xPbB9CqywPOyd/preview','Data Science dengan Microsoft Fabric — Dicoding × METC')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=16UnQNDSrcjFT2r9rNz-xPbB9CqywPOyd&sz=w800" alt="Data Science dengan Microsoft Fabric certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Data Science dengan Microsoft Fabric</div>
+            <div class="cred-issuer">Microsoft Elevate Training Center (METC) × Dicoding</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1AO9VbYf2S8s-bB1oKwjYIqpmDzARxwTg/preview','Membangun Aplikasi Gen AI dengan Microsoft Azure — Dicoding')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1AO9VbYf2S8s-bB1oKwjYIqpmDzARxwTg&sz=w800" alt="Membangun Aplikasi Gen AI dengan Microsoft Azure certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Membangun Aplikasi Gen AI dengan Microsoft Azure</div>
+            <div class="cred-issuer">Dicoding × Microsoft Azure</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── Internet Reactor Laboratory BRIN 2023── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">Internet Reactor Laboratory BRIN 2023</div>
-      <div class="achieve-issuer">BRIN (Badan Riset dan Inovasi Nasional)</div>
-      <span class="achieve-year">2023</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Participated in the Internet Reactor Laboratory program by BRIN — a virtual nuclear reactor simulation initiative introducing participants to reactor physics concepts and nuclear science fundamentals.</div>
-        <a href="https://drive.google.com/file/d/1VyMzUyv7pLrK9WLoOSAmT-S_1nPeT_GD/view?usp=sharing" class="peek-link">View Certificate ↗</a>
+    <!-- ── Panel: Software Engineering ── -->
+    <div class="tab-panel" id="cert-panel-se">
+      <div class="cred-grid">
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1ZjYyVMAJ0KFu1AYgqm5eNV0YR-WhH576/preview','Mini Bootcamp Introduction to Software Engineering — RevoU')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1ZjYyVMAJ0KFu1AYgqm5eNV0YR-WhH576&sz=w800" alt="Mini Bootcamp Introduction to Software Engineering certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Mini Bootcamp Introduction to Software Engineering</div>
+            <div class="cred-issuer">RevoU</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── Program Terapan Bidang Teknologi Informasi & Komunikasi (PRODISTIK) ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">Program Terapan Bidang Teknologi Informasi & Komunikasi (PRODISTIK)</div>
-      <div class="achieve-issuer">Sepuluh Nopember Institute of Technology</div>
-      <span class="achieve-year">2021</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Completed the Applied ICT Program (PRODISTIK) by Institut Teknologi Sepuluh Nopember — a structured curriculum covering practical computing and digital technology applications, completed during high school.</div>
+    <!-- ── Panel: Touch Typing ── -->
+    <div class="tab-panel" id="cert-panel-typing">
+      <div class="cred-grid">
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/embeddedfolderview?id=10DhCRz5pnzDQXotEkPqzFF6-8eog3yc0#grid','Touch Typing Certificates — typing.com & typingtest.me')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1q4lrWxsWZM2g97FkvQkITa47p6WTqYWB&sz=w800" alt="Touch Typing Advanced Unit certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              Folder · view all
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Touch Typing Certificate</div>
+            <div class="cred-issuer">typing.com · Beginner · Intermediate · Advanced</div>
+            <div class="cred-extra">Latest test (21 Aug 2026): 65 WPM · 97% accuracy · 84% consistency · 5.5 keystroke/s</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── Semifinalist — LKTI Scientific Paper Competition ── -->
-    <div class="achieve-card">
-      <span class="cred-type cred-type-achieve">Achievement</span>
-      <div class="achieve-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-4 7h16l-4-7"/></svg></div>
-      <div class="achieve-name">Semifinalist — LKTI Scientific Paper Competition — History Competition Season V</div>
-      <div class="achieve-issuer">Faculty of Social Sciences and Law University of Surabaya</div>
-      <span class="achieve-year">2020</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this achievement</div>
-        <div class="peek-desc">Reached the semifinal stage of a scientific writing competition at the high school level, demonstrating early capability and interest in research writing.</div>
-        <a href="https://drive.google.com/file/d/1kog2n9JoCjy8oqIkJp1ro70YXc5HwsTh/view?usp=sharing" class="peek-link">View Certificate ↗</a>
-      </div>
-    </div>
+    <!-- ── Panel: Other ── -->
+    <div class="tab-panel" id="cert-panel-other">
+      <div class="cred-grid">
 
-        <!-- ── Graphic Design ── -->
-     <div class="achieve-card">
-      <span class="cred-type cred-type-cert">Certification</span>
-      <div class="achieve-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
-      </div>
-      <div class="achieve-name">Graphic Design</div>
-      <div class="achieve-issuer">Tulungagung Vocational Training Center (Technical Implementation Unit)</div>
-      <span class="achieve-year">2020</span>
-      <div class="peek-panel">
-        <div class="peek-eyebrow">About this certificate</div>
-        <div class="peek-desc">Completed a graphic design training program at the Tulungagung Vocational Training Center — covering fundamental design principles, layout composition, and digital graphic production tools.</div>
-        <a href="https://drive.google.com/file/d/1vdD_8qAY4XfgVq1Wyd0LlAOfCkb2SdQJ/view?usp=sharing" target="_blank" class="peek-link">View Certificates ↗</a>
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/14hWoPiyTrWuEM26Mo5CaQfEZ42cRPRR-/preview','2nd International Basic Science Conference')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=14hWoPiyTrWuEM26Mo5CaQfEZ42cRPRR-&sz=w800" alt="2nd International Basic Science Conference certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">2nd International Basic Science Conference</div>
+            <div class="cred-issuer">University of Jember</div>
+            <div class="cred-footer"><span class="cred-year">2024</span></div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1VyMzUyv7pLrK9WLoOSAmT-S_1nPeT_GD/preview','Internet Reactor Laboratory — BRIN')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1VyMzUyv7pLrK9WLoOSAmT-S_1nPeT_GD&sz=w800" alt="Internet Reactor Laboratory BRIN certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Internet Reactor Laboratory BRIN 2023</div>
+            <div class="cred-issuer">BRIN (Badan Riset dan Inovasi Nasional)</div>
+            <div class="cred-footer"><span class="cred-year">2023</span></div>
+          </div>
+        </div>
+
+        <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1GkP-lIuEOlcWtv7d59jgYXbyqOKcx9fr/preview','Webinar Roadmap Career Data Analyst — Portolabs')">
+          <div class="cred-thumb">
+            <span class="cred-type-tag cert">Certificate</span>
+            <img src="https://drive.google.com/thumbnail?id=1GkP-lIuEOlcWtv7d59jgYXbyqOKcx9fr&sz=w800" alt="Webinar Roadmap Career Data Analyst certificate"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="cred-thumb-placeholder" style="display:none">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+              Preview unavailable
+            </div>
+            <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Webinar: Roadmap Career Data Analyst</div>
+            <div class="cred-issuer">Portolabs</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ══ 9. ACHIEVEMENTS ══ -->
+<section id="achievements">
+  <div class="section-title-row reveal">
+    <div>
+      <div class="section-eyebrow">Recognition & Honors</div>
+      <div class="section-title" style="margin-bottom:0">Achievements</div>
+    </div>
+    <button class="achieve-eye-btn" onclick="toggleAchievements()" id="achieveToggleBtn" type="button">
+      <svg class="eye-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <svg class="eye-off-icon" viewBox="0 0 24 24" style="display:none"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.28 20.28 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 8 11 8a20.3 20.3 0 0 1-3.22 4.44M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+      <span id="achieveToggleLabel">Tampilkan</span>
+    </button>
+  </div>
+
+  <div class="achieve-reveal-wrap reveal" id="achieveWrap">
+    <div class="cred-grid">
+
+      <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1s931zaQRWVBoXVG05IT79zG79iXUiA3J/preview','TOEFL ITP — Score 563')">
+        <div class="cred-thumb">
+          <span class="cred-type-tag achieve">Achievement</span>
+          <img src="https://drive.google.com/thumbnail?id=1s931zaQRWVBoXVG05IT79zG79iXUiA3J&sz=w800" alt="TOEFL ITP certificate"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="cred-thumb-placeholder" style="display:none">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Preview unavailable
+          </div>
+          <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        </div>
+        <div class="cred-body">
+          <div class="cred-name">TOEFL ITP — Score 563</div>
+          <div class="cred-issuer">ONE STOP ENGLISH EDUCATION · Officially Proctored Remote Testing</div>
+          <div class="cred-footer"><span class="cred-year">2026</span></div>
+        </div>
+      </div>
+
+      <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1IPwNoP0kYCNAPF6Rdk7m7FxOEo0m81Uj/preview','Cum laude Certificate')">
+        <div class="cred-thumb">
+          <span class="cred-type-tag achieve">Achievement</span>
+          <img src="https://drive.google.com/thumbnail?id=1IPwNoP0kYCNAPF6Rdk7m7FxOEo0m81Uj&sz=w800" alt="Cum laude certificate"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="cred-thumb-placeholder" style="display:none">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-4 7h16l-4-7"/></svg>
+            Preview unavailable
+          </div>
+          <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        </div>
+        <div class="cred-body">
+          <div class="cred-name">Cum laude Certificate</div>
+          <div class="cred-issuer">Faculty of Mathematics and Natural Sciences University of Jember</div>
+          <div class="cred-footer"><span class="cred-year">2026</span></div>
+        </div>
+      </div>
+
+      <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1NFmemZwPzdBV7-FYTnAMSkrPzNnCiEvJ/preview','Laboratory Practice Assistant')">
+        <div class="cred-thumb">
+          <span class="cred-type-tag achieve">Achievement</span>
+          <img src="https://drive.google.com/thumbnail?id=1NFmemZwPzdBV7-FYTnAMSkrPzNnCiEvJ&sz=w800" alt="Laboratory Practice Assistant certificate"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="cred-thumb-placeholder" style="display:none">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>
+            Preview unavailable
+          </div>
+          <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        </div>
+        <div class="cred-body">
+          <div class="cred-name">Laboratory Practice Assistant</div>
+          <div class="cred-issuer">Faculty of Mathematics and Natural Sciences University of Jember</div>
+          <div class="cred-footer"><span class="cred-year">2025</span></div>
+        </div>
+      </div>
+
+      <div class="cred-card clickable" onclick="openCertModal('https://drive.google.com/file/d/1kog2n9JoCjy8oqIkJp1ro70YXc5HwsTh/preview','Semifinalist — LKTI Scientific Paper Competition')">
+        <div class="cred-thumb">
+          <span class="cred-type-tag achieve">Achievement</span>
+          <img src="https://drive.google.com/thumbnail?id=1kog2n9JoCjy8oqIkJp1ro70YXc5HwsTh&sz=w800" alt="LKTI Semifinalist certificate"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="cred-thumb-placeholder" style="display:none">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-4 7h16l-4-7"/></svg>
+            Preview unavailable
+          </div>
+          <div class="cred-thumb-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        </div>
+        <div class="cred-body">
+          <div class="cred-name">Semifinalist — LKTI Scientific Paper Competition — History Competition Season V</div>
+          <div class="cred-issuer">Faculty of Social Sciences and Law University of Surabaya</div>
+          <div class="cred-footer"><span class="cred-year">2020</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="achieve-blur-overlay" id="achieveOverlay">
+      <div class="achieve-blur-hint">🔒 Konten disembunyikan — klik "Tampilkan" di atas untuk melihat</div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ══ 10. PROJECT CASES ══ -->
 <section id="projects">
   <div class="section-eyebrow">Portfolio</div>
   <div class="section-title">Project Cases</div>
-  <div class="project-grid reveal">
 
-    <!--
-      PROJECT CARD TEMPLATE — Duplikat blok ini untuk setiap project baru.
-      Ganti:
-        - .project-title → judul project
-        - .project-desc → deskripsi singkat (masalah → pendekatan → temuan)
-        - .tool-tag → tools yang dipakai
-        - .project-date → bulan/tahun
-        - .project-link href → link ke GitHub, Drive, atau nbviewer
-        - .project-thumb img src → screenshot hasil (opsional)
-        - .project-status text + class → "Completed" atau "In Progress"
-    -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <!-- Ganti src dengan screenshot project kamu -->
-        <img src="" alt="" onerror="this.style.display='none'">
-        <div class="thumb-placeholder">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          Add screenshot
+  <div class="tab-nav reveal">
+    <button class="tab-btn active" data-target="proj-panel-da" onclick="switchTab(this)">Data Analytics <span class="tab-count">(1)</span></button>
+    <button class="tab-btn" data-target="proj-panel-dsml" onclick="switchTab(this)">Data Science & ML <span class="tab-count">(1)</span></button>
+    <button class="tab-btn" data-target="proj-panel-se" onclick="switchTab(this)">Software Engineering <span class="tab-count">(0)</span></button>
+    <button class="tab-btn" data-target="proj-panel-other" onclick="switchTab(this)">Other <span class="tab-count">(0)</span></button>
+  </div>
+
+  <div class="reveal">
+
+    <!-- ── Panel: Data Analytics ── -->
+    <div class="tab-panel active" id="proj-panel-da">
+      <div class="cred-grid">
+
+        <!--
+          PROJECT CARD TEMPLATE — duplikat blok .cred-card ini untuk project baru.
+          Ganti: .cred-name (judul), .cred-issuer (deskripsi singkat), .cred-year,
+          .cred-type-tag class "coming"/"progress" (status), dan img src di .cred-thumb
+          kalau sudah ada screenshot hasil project.
+        -->
+        <div class="cred-card">
+          <div class="cred-thumb">
+            <span class="cred-type-tag coming">Coming Soon</span>
+            <div class="cred-thumb-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Screenshot coming soon
+            </div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Excel Analytics Project</div>
+            <div class="cred-issuer">Dashboard & analisis data menggunakan Excel — diisi setelah bootcamp/shortclass selesai.</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
         </div>
-        <span class="project-status badge-gold">Completed</span>
-      </div>
-      <div class="project-body">
-        <div class="project-title">Cooming Soon<!--Nama Project — Deskripsi Singkat--></div>
-        <div class="project-desc"><!--Jelaskan masalah yang diselesaikan, pendekatan yang dipakai, dan temuan utama. Isi sendiri setelah bootcamp/shortclass.--></div>
-        <div class="project-tools">
-          <span class="tool-tag tool-tag-gold">Excel</span>
-        </div>
-        <div class="project-footer">
-          <span class="project-date">MM · 2026</span>
-          <a href="#" class="project-link">View ↗</a>
-        </div>
+
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-thumb">
-        <img src="" alt="" onerror="this.style.display='none'">
-        <div class="thumb-placeholder">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Add screenshot
+    <!-- ── Panel: Data Science & Machine Learning ── -->
+    <div class="tab-panel" id="proj-panel-dsml">
+      <div class="cred-grid">
+
+        <div class="cred-card">
+          <div class="cred-thumb">
+            <span class="cred-type-tag progress">In Progress</span>
+            <div class="cred-thumb-placeholder">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Screenshot coming soon
+            </div>
+          </div>
+          <div class="cred-body">
+            <div class="cred-name">Scientific Data Visualization — Computational Physics</div>
+            <div class="cred-issuer">Visualisasi data numerik dari mata kuliah Fisika Komputasi menggunakan Python (NumPy, Matplotlib).</div>
+            <div class="cred-footer"><span class="cred-year">2026</span></div>
+          </div>
         </div>
-        <span class="project-status status-progress" style="position:absolute;top:0.75rem;right:0.75rem;font-size:0.68rem;font-weight:500;padding:0.2rem 0.6rem;border-radius:100px">In Progress</span>
+
       </div>
-      <div class="project-body">
-        <div class="project-title">Cooming Soon<!--Scientific Data Visualization — Computational Physics--></div>
-        <div class="project-desc"><!--Visualisasi data numerik dari mata kuliah Fisika Komputasi menggunakan Python (NumPy, Matplotlib) — sebagai bukti kemampuan analisis dan visualisasi data kuantitatif.--></div>
-        <div class="project-tools">
-          <span class="tool-tag tool-tag-gold">Python</span>
-        </div>
-        <div class="project-footer">
-          <span class="project-date">2026</span>
-          <a href="#" class="project-link">View ↗</a>
-        </div>
-      </div>
+    </div>
+
+    <!-- ── Panel: Software Engineering ── -->
+    <div class="tab-panel" id="proj-panel-se">
+      <div class="cred-empty">Belum ada project di kategori ini — sedang disiapkan.</div>
+    </div>
+
+    <!-- ── Panel: Other ── -->
+    <div class="tab-panel" id="proj-panel-other">
+      <div class="cred-empty">Belum ada project di kategori ini — sedang disiapkan.</div>
     </div>
 
   </div>
@@ -1066,6 +1245,15 @@ footer p{font-size:0.82rem;color:var(--gray)}
   </div>
 </footer>
 
+<!-- ══ CERTIFICATE VIEWER MODAL ══ -->
+<div class="cert-modal-overlay" id="certModalOverlay">
+  <div class="cert-modal-box">
+    <div class="cert-modal-title" id="certModalTitle"></div>
+    <button class="cert-modal-close" aria-label="Close" onclick="closeCertModal()">&times;</button>
+    <iframe id="certModalFrame" src="" title="Certificate viewer"></iframe>
+  </div>
+</div>
+
 <script>
 // ── SCROLL REVEAL ──
 const revealEls = document.querySelectorAll('.reveal');
@@ -1092,13 +1280,6 @@ const countObs = new IntersectionObserver(entries => {
 },{threshold:0.5});
 countEls.forEach(el => countObs.observe(el));
 
-// ── PROGRESS BARS ──
-const bars = document.querySelectorAll('.progress-fill');
-const barObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.style.width = e.target.dataset.width + '%'; barObs.unobserve(e.target); }});
-},{threshold:0.3});
-bars.forEach(b => barObs.observe(b));
-
 // ── NAV ACTIVE HIGHLIGHT ──
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -1112,6 +1293,44 @@ const navObs = new IntersectionObserver(entries => {
   });
 },{threshold:0.4});
 sections.forEach(s => navObs.observe(s));
+
+// ── TAB SWITCHER (Certifications & Projects) ──
+function switchTab(btn){
+  const section = btn.closest('section');
+  section.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  section.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  section.querySelector('#' + btn.dataset.target).classList.add('active');
+}
+
+// ── ACHIEVEMENTS REVEAL/HIDE TOGGLE ──
+function toggleAchievements(){
+  const wrap = document.getElementById('achieveWrap');
+  const revealed = wrap.classList.toggle('revealed');
+  const btn = document.getElementById('achieveToggleBtn');
+  btn.querySelector('.eye-icon').style.display = revealed ? 'none' : 'block';
+  btn.querySelector('.eye-off-icon').style.display = revealed ? 'block' : 'none';
+  document.getElementById('achieveToggleLabel').textContent = revealed ? 'Sembunyikan' : 'Tampilkan';
+}
+
+// ── CERTIFICATE VIEWER MODAL ──
+const certOverlay = document.getElementById('certModalOverlay');
+const certFrame = document.getElementById('certModalFrame');
+const certTitle = document.getElementById('certModalTitle');
+
+function openCertModal(url, title){
+  certFrame.src = url;
+  certTitle.textContent = title || '';
+  certOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeCertModal(){
+  certOverlay.classList.remove('active');
+  certFrame.src = '';
+  document.body.style.overflow = '';
+}
+certOverlay.addEventListener('click', e => { if(e.target === certOverlay) closeCertModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeCertModal(); });
 </script>
 </body>
 </html>
