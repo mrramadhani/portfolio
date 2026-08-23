@@ -67,6 +67,24 @@ nav{
 .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.65rem 1.4rem;border-radius:var(--radius-sm);font-size:0.875rem;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none}
 .btn-primary{background:var(--navy);color:var(--white)}.btn-primary:hover{background:var(--navy-light)}
 .btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}.btn-outline:hover{background:var(--navy-pale)}
+
+/* ── CV DOWNLOAD DROPDOWN ── */
+.cv-dropdown{position:relative;display:inline-block}
+.cv-menu{
+  position:absolute;top:calc(100% + 0.5rem);left:0;z-index:50;
+  min-width:220px;background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius-sm);box-shadow:0 12px 32px rgba(35,28,48,0.16);
+  overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity 0.18s ease,transform 0.18s ease,visibility 0.18s;
+}
+.cv-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+.cv-menu a{
+  display:flex;align-items:center;padding:0.75rem 1rem;
+  text-decoration:none;transition:background 0.15s;border-bottom:1px solid var(--border);
+}
+.cv-menu a:last-child{border-bottom:none}
+.cv-menu a:hover{background:var(--light)}
+.cv-menu-lang{font-size:0.84rem;font-weight:500;color:var(--dark)}
 /* ── CONTACT ICONS ── */
 .contact-icons{display:flex;flex-wrap:wrap;gap:0.6rem}
 .ci{
@@ -388,10 +406,21 @@ footer p{font-size:0.82rem;color:var(--gray)}
       Published in Q1 · GPA 3.72 · Based in Tulungagung, East Java.
     </p>
     <div class="hero-actions">
-      <a href="CV_Muhammad_Rizky_Ramadhani_EN.docx" class="btn btn-primary">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download CV
-      </a>
+      <div class="cv-dropdown">
+        <button class="btn btn-primary" onclick="toggleCvMenu()" id="cvDownloadBtn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:0.15rem"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="cv-menu" id="cvMenu">
+          <a href="assets/cv/CV_Muhammad_Rizky_Ramadhani_ID.pdf" target="_blank" rel="noopener">
+            <span class="cv-menu-lang">Bahasa Indonesia</span>
+          </a>
+          <a href="assets/cv/CV_Muhammad_Rizky_Ramadhani_EN.pdf" target="_blank" rel="noopener">
+            <span class="cv-menu-lang">English</span>
+          </a>
+        </div>
+      </div>
       <a href="mailto:rramadhani.work@gmail.com" class="btn btn-outline">Get in Touch</a>
     </div>
     <div class="contact-icons">
@@ -1302,6 +1331,17 @@ function switchTab(btn){
   btn.classList.add('active');
   section.querySelector('#' + btn.dataset.target).classList.add('active');
 }
+
+// ── CV DOWNLOAD DROPDOWN ──
+function toggleCvMenu(){
+  document.getElementById('cvMenu').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  const dropdown = document.querySelector('.cv-dropdown');
+  if(dropdown && !dropdown.contains(e.target)){
+    document.getElementById('cvMenu').classList.remove('open');
+  }
+});
 
 // ── ACHIEVEMENTS REVEAL/HIDE TOGGLE ──
 function toggleAchievements(){
